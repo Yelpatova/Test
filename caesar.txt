@@ -1,0 +1,89 @@
+#include "stdafx.h"
+#include <iostream>
+#include <cstdlib>
+#include <string>
+using namespace std;
+
+class Caesar
+{
+private:
+	char Shift(char sl);
+	char Shift1(char sl);
+	int k;
+public:
+	Caesar(int key);
+		string encode(const string s);
+		string decode(const string s);
+};
+int main()
+{
+	int i,  k;
+	string sl;
+	cout << "write word" << endl;
+	cin >> sl;
+	cout << "write key" << endl;
+	cin >> k;
+	Caesar x(k);
+	string z_text= x.encode(sl);
+	string r_text = x.decode(z_text);
+	cout <<"encode: "<< z_text << endl <<"decode: "<< r_text << endl;
+	return 0;
+}
+
+Caesar::Caesar(int key) :k(key) {}
+
+char Caesar::Shift(char sl)
+{
+	char alf[26] = { 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z' };
+	int i = 0;
+	for (i = 0; i < 26; i++)
+	{
+		if ((sl == alf[i])&((i + k) < 26))
+		{
+			sl = alf[i + k];
+			i = 26;
+		}
+		if ((sl == alf[i])&((i + k) > 25))
+		{
+			sl = alf[i + k - 26];
+			i = 26;
+		}
+	}
+	return sl;
+}
+
+char Caesar::Shift1(char sl)
+{
+	char alf[26] = { 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z' };
+	int i = 0;
+	for (i = 0; i < 26; i++)
+	{
+		if ((sl == alf[i])&((i - k) >= 0))
+		{
+			sl = alf[i - k];
+			i = 26;
+		}
+		if ((sl == alf[i])&((i - k) < 0))
+		{
+			sl = alf[i - k + 26];
+			i = 26;
+		}
+	}
+	return sl;
+}
+
+string Caesar::encode(const string s)
+{
+	string rez;
+	for (int i=0; i<s.size();i++)
+		rez+=Shift(s[i]); 
+	return rez;
+}
+
+string Caesar::decode(const string s)
+{
+	string rez;
+	for (int i = 0; i<s.size(); i++)
+		rez += Shift1(s[i]); 
+	return rez;
+}
