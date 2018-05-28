@@ -1,23 +1,4 @@
-timp.h
-#pragma once
-#include "stdafx.h"
-#include <iostream>
-#include <cstdlib>
-#include <string>
-using namespace std;
-class Caesar
-{
-private:
-	char Shift(char sl);
-	char Shift1(char sl);
-	int k;
-public:
-	Caesar(int key);
-	string encode(const string s);
-	string decode(const string s);
-};
-
-timp1.cpp
+//timp1.cpp
 #include "stdafx.h"
 #include <iostream>
 #include <cctype>
@@ -83,42 +64,4 @@ string Caesar::decode(const string s)
 	for (int i = 0; i<s.size(); i++)
 		rez += toupper(Shift1(s[i]));
 	return rez;
-}
-
-CAESAR.cpp
-#include "stdafx.h"
-#include <iostream>
-#include <cstdlib>
-#include "timp.h"
-#include <string>
-using namespace std;
-int main()
-{
-	try {
-		int   k;
-		string sl;
-		cout << "write key" << endl;
-		cin >> k;
-		if (k <= 0 || k >= 26)
-			throw 1;
-		cout << "write word" << endl;
-		cin >> sl;
-		Caesar x(k);
-		string z_text = x.encode(sl);
-		string r_text = x.decode(sl);
-		cout << "encode: " << z_text << endl << "decode: " << r_text << endl;
-	}
-	catch(int err)
-	{
-		if (err == 1)
-		{
-			cout << "Invalid key!" << endl;
-			return 1;
-		}
-		if (err == 2)
-		{
-			cout << "Incorrect word!" << endl;
-	}
-	}
-	return 0;
 }
